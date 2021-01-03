@@ -90,13 +90,13 @@ def covert_enum(level: int, enum: EnumDescriptor) -> str:
 
 def convert_field(level: int, field: FieldDescriptor) -> str:
     field_type = field.type
+    extra = None
 
     if field_type == FieldDescriptor.TYPE_ENUM:
         type_statement = "enum.IntEnum"
         extra = covert_enum(level + 1, field.enum_type)
     elif field_type != FieldDescriptor.TYPE_MESSAGE:
         type_statement = type_mapping[field_type].__name__
-        extra = None
     else:
         type_statement = field.message_type.name
         if type_statement == Struct.__name__:
