@@ -26,5 +26,5 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     install_requires=install_requires,
-    entry_points={"console_scripts": ["pb2pydantic = protobuf2pydantic.main:app"]}
+    entry_points={"console_scripts": ["pb2py = protobuf2pydantic.main:app"]}
 )

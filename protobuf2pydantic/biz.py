@@ -1,12 +1,10 @@
 from os import linesep
 from typing import List
 from functools import partial
-from pathlib import Path
 
 from google.protobuf.reflection import GeneratedProtocolMessageType
 from google.protobuf.descriptor import Descriptor, FieldDescriptor
 from google.protobuf.struct_pb2 import Struct
-from jinja2 import Environment, PackageLoader
 
 tab = " " * 4
 one_line, two_lines = linesep * 2, linesep * 3
@@ -75,6 +73,11 @@ def pb2_to_pydantic(module) -> str:
         model_string = msg2pydantic(0, obj.DESCRIPTOR)
         pydantic_models.append(model_string)
 
-    env = Environment(loader=PackageLoader(Path.cwd().name))
-    template = env.get_template("pydantic.jinja2")
-    return template.render(models=pydantic_models)
+    header = """
+from typing import List, Dict
+from enum import IntEnum
+
+from pydantic import BaseModel
+    
+"""
+    return header + linesep.join(pydantic_models)
