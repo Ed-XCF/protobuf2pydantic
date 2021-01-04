@@ -1,2 +1,2 @@
 # protobuf2pydantic
-generate pydantic model by protobuf.pb2 file
+Generate a file which include pydantic models by protobuf.pb2 file

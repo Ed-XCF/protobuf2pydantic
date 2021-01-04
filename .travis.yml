@@ -1,0 +1,13 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+branches:
+  only:
+    - master
+cache: pip
+install: make init
+script: make test
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
