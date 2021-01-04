@@ -1,4 +1,4 @@
-from protobuf2pydantic.main import pb2_to_pydantic
+from protobuf2pydantic.biz import pb2_to_pydantic
 
 
 class TestPb2ToPydantic:
