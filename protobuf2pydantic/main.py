@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 from importlib import import_module
 
-from typer import Typer, echo
+from typer import Typer, echo, Argument
 
 from protobuf2pydantic import biz
 
@@ -10,8 +10,14 @@ app = Typer()
 
 
 @app.command()
-def pydantic(pb2_path: str):
-    path = Path(pb2_path).resolve()
-    sys.path.append(str(path.parent))
-    module = import_module(path.name.split('.')[0])
+def pydantic(
+        pb2: Path = Argument(
+            ...,
+            exists=True,
+            dir_okay=False,
+            resolve_path=True,
+        )
+):
+    sys.path.append(str(pb2.parent))
+    module = import_module(pb2.name.split('.')[0])
     echo(biz.pb2_to_pydantic(module))
