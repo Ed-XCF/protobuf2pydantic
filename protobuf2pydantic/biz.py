@@ -3,7 +3,7 @@ from typing import List
 from functools import partial
 
 from google.protobuf.reflection import GeneratedProtocolMessageType
-from google.protobuf.descriptor import Descriptor, FieldDescriptor
+from google.protobuf.descriptor import Descriptor, FieldDescriptor, EnumDescriptor
 from google.protobuf.struct_pb2 import Struct
 
 tab = " " * 4
@@ -33,11 +33,12 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
     extra = None
 
     if field_type == FieldDescriptor.TYPE_ENUM:
-        type_statement = field.name
-        class_statement = f"{tab * level}class {field.name}(IntEnum):"
+        enum_type: EnumDescriptor = field.enum_type
+        type_statement = enum_type.name
+        class_statement = f"{tab * level}class {enum_type.name}(IntEnum):"
         field_statements = map(
             lambda value: f"{tab * (level + 1)}{value.name} = {value.index}",
-            field.enum_type.values,
+            enum_type.values,
         )
         extra = linesep.join([class_statement, *field_statements])
     elif field_type == FieldDescriptor.TYPE_MESSAGE:
@@ -73,11 +74,11 @@ def pb2_to_pydantic(module) -> str:
         model_string = msg2pydantic(0, obj.DESCRIPTOR)
         pydantic_models.append(model_string)
 
-    header = """
-from typing import List, Dict
+    header = """from typing import List, Dict
 from enum import IntEnum
 
 from pydantic import BaseModel
-    
+
+
 """
     return header + linesep.join(pydantic_models)
