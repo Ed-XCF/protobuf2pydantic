@@ -81,4 +81,4 @@ from pydantic import BaseModel
 
 
 """
-    return header + linesep.join(pydantic_models)
+    return header + one_line.join(pydantic_models)
