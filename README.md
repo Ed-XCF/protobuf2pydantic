@@ -10,3 +10,5 @@ To install redis-cooker, simply:
     >>> pb2py ../test_pb2.py > wow.py
 
 ### Now, enjoy yourself :)
+### * Required proto file syntax = "proto3";
+### * No plan to support "oneof"
