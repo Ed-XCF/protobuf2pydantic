@@ -19,5 +19,5 @@ def pydantic(
         )
 ):
     sys.path.append(str(pb2.parent))
-    module = import_module(pb2.name.split('.')[0])
+    module = import_module(pb2.stem)
     echo(biz.pb2_to_pydantic(module))

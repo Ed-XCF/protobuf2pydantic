@@ -6,4 +6,5 @@ runner = CliRunner()
 
 
 def test_app():
-    runner.invoke(app, ["./tests/test_pb2.py"])
+    r = runner.invoke(app, ["./tests/test_pb2.py"])
+    assert r.exit_code == 0
