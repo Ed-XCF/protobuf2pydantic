@@ -1,7 +1,6 @@
 # protobuf2pydantic
 ### Generate a file which include pydantic models by using protobuf.pb2 file
 ## Installation
-To install redis-cooker, simply:
 
     $ pip install protobuf2pydantic
 
@@ -21,6 +20,5 @@ To install redis-cooker, simply:
     >>> print(type(klass))
     <class 'pydantic.main.ModelMetaclass'>
 
-### Now, enjoy yourself :)
 ### * Required proto file syntax = "proto3";
 ### * No plan to support "oneof"
