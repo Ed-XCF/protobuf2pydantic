@@ -1,5 +1,5 @@
 from os import linesep
-from typing import List, Dict
+from typing import List
 from functools import partial
 from enum import IntEnum
 
@@ -47,7 +47,7 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
     elif field_type == FieldDescriptor.TYPE_MESSAGE:
         type_statement = field.message_type.name
         if type_statement == Struct.__name__:
-            type_statement = Dict._name  # noqa
+            type_statement = "Dict"
             factory = dict.__name__
         else:
             extra = msg2pydantic(level, field.message_type)
@@ -57,7 +57,7 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
         factory = type_statement
 
     if field.label == FieldDescriptor.LABEL_REPEATED:
-        type_statement = f"{List._name}[{type_statement}]"  # noqa
+        type_statement = f"List[{type_statement}]"
         factory = list.__name__
 
     default_statement = f"{Field.__name__}(default_factory={factory})"
