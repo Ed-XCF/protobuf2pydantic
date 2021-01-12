@@ -1,4 +1,10 @@
 # protobuf2pydantic
+
+![GitHub](https://img.shields.io/github/license/Ed-XCF/protobuf2pydantic)
+[![Build Status](https://www.travis-ci.org/Ed-XCF/protobuf2pydantic.svg?branch=main)](https://www.travis-ci.org/Ed-XCF/protobuf2pydantic)
+[![codecov](https://codecov.io/gh/Ed-XCF/protobuf2pydantic/branch/main/graph/badge.svg?token=4YYBSTLS5F)](https://codecov.io/gh/Ed-XCF/protobuf2pydantic)
+![PyPI](https://img.shields.io/pypi/v/protobuf2pydantic)
+
 ### Generate a file which include pydantic models by using protobuf.pb2 file
 ## Installation
 
