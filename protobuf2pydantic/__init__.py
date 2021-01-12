@@ -1,6 +1,6 @@
+from os import linesep
 from typing import Type, List, Dict  # noqa
 from enum import IntEnum  # noqa
-from os import linesep
 
 from google.protobuf.reflection import GeneratedProtocolMessageType
 from pydantic import BaseModel, Field  # noqa
