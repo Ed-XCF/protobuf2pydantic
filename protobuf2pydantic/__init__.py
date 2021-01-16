@@ -3,6 +3,9 @@ from typing import Type, List, Dict  # noqa
 from enum import IntEnum  # noqa
 
 from google.protobuf.reflection import GeneratedProtocolMessageType
+from google.protobuf.struct_pb2 import Struct  # noqa
+from google.protobuf.timestamp_pb2 import Timestamp  # noqa
+from google.protobuf.duration_pb2 import Duration  # noqa
 from pydantic import BaseModel, Field  # noqa
 
 from protobuf2pydantic.biz import msg2pydantic
