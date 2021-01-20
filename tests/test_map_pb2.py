@@ -12,6 +12,7 @@ _sym_db = _symbol_database.Default()
 
 
 from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
+from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -20,9 +21,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\nssss.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xcb\x02\n\x07Payload\x12\t\n\x01\x61\x18\x01 \x01(\x05\x12\t\n\x01\x62\x18\x02 \x01(\t\x12\x1a\n\x01\x63\x18\x03 \x03(\x0b\x32\x0f.Payload.CEntry\x12\x17\n\x01\x64\x18\x04 \x01(\x0b\x32\x0c.Payload.wow\x12\x1a\n\x01\x65\x18\x05 \x03(\x0b\x32\x0f.Payload.EEntry\x12\"\n\x01\x66\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x18\n\x01g\x18\x07 \x03(\x0b\x32\r.Payload.wows\x12\"\n\x01h\x18\x08 \x03(\x0b\x32\x17.google.protobuf.Struct\x1a(\n\x06\x43\x45ntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05:\x02\x38\x01\x1a\x10\n\x03wow\x12\t\n\x01z\x18\x01 \x01(\t\x1a(\n\x06\x45\x45ntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x11\n\x04wows\x12\t\n\x01z\x18\x01 \x01(\t\" \n\x08Response\x12\t\n\x01\x61\x18\x01 \x01(\x05\x12\t\n\x01\x62\x18\x02 \x01(\t2F\n\x04Test\x12\x1e\n\x03One\x12\x08.Payload\x1a\t.Response\"\x00(\x01\x12\x1e\n\x03Two\x12\x08.Payload\x1a\t.Response\"\x00(\x01\x62\x06proto3'
+  serialized_pb=b'\n\nssss.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf2\x02\n\x07Payload\x12\t\n\x01\x61\x18\x01 \x01(\x05\x12\t\n\x01\x62\x18\x02 \x01(\t\x12\x1a\n\x01\x63\x18\x03 \x03(\x0b\x32\x0f.Payload.CEntry\x12\x17\n\x01\x64\x18\x04 \x01(\x0b\x32\x0c.Payload.wow\x12\x1a\n\x01\x65\x18\x05 \x03(\x0b\x32\x0f.Payload.EEntry\x12\"\n\x01\x66\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x18\n\x01g\x18\x07 \x03(\x0b\x32\r.Payload.wows\x12\"\n\x01h\x18\x08 \x03(\x0b\x32\x17.google.protobuf.Struct\x12%\n\x01i\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x1a(\n\x06\x43\x45ntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05:\x02\x38\x01\x1a\x10\n\x03wow\x12\t\n\x01z\x18\x01 \x01(\t\x1a(\n\x06\x45\x45ntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x11\n\x04wows\x12\t\n\x01z\x18\x01 \x01(\t\" \n\x08Response\x12\t\n\x01\x61\x18\x01 \x01(\x05\x12\t\n\x01\x62\x18\x02 \x01(\t2F\n\x04Test\x12\x1e\n\x03One\x12\x08.Payload\x1a\t.Response\"\x00(\x01\x12\x1e\n\x03Two\x12\x08.Payload\x1a\t.Response\"\x00(\x01\x62\x06proto3'
   ,
-  dependencies=[google_dot_protobuf_dot_struct__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_protobuf_dot_struct__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
 
 
@@ -61,8 +62,8 @@ _PAYLOAD_CENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=257,
-  serialized_end=297,
+  serialized_start=329,
+  serialized_end=369,
 )
 
 _PAYLOAD_WOW = _descriptor.Descriptor(
@@ -92,8 +93,8 @@ _PAYLOAD_WOW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=299,
-  serialized_end=315,
+  serialized_start=371,
+  serialized_end=387,
 )
 
 _PAYLOAD_EENTRY = _descriptor.Descriptor(
@@ -130,8 +131,8 @@ _PAYLOAD_EENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=317,
-  serialized_end=357,
+  serialized_start=389,
+  serialized_end=429,
 )
 
 _PAYLOAD_WOWS = _descriptor.Descriptor(
@@ -161,8 +162,8 @@ _PAYLOAD_WOWS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=359,
-  serialized_end=376,
+  serialized_start=431,
+  serialized_end=448,
 )
 
 _PAYLOAD = _descriptor.Descriptor(
@@ -229,6 +230,13 @@ _PAYLOAD = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='i', full_name='Payload.i', index=8,
+      number=9, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -241,8 +249,8 @@ _PAYLOAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=45,
-  serialized_end=376,
+  serialized_start=78,
+  serialized_end=448,
 )
 
 
@@ -280,8 +288,8 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=378,
-  serialized_end=410,
+  serialized_start=450,
+  serialized_end=482,
 )
 
 _PAYLOAD_CENTRY.containing_type = _PAYLOAD
@@ -294,6 +302,7 @@ _PAYLOAD.fields_by_name['e'].message_type = _PAYLOAD_EENTRY
 _PAYLOAD.fields_by_name['f'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
 _PAYLOAD.fields_by_name['g'].message_type = _PAYLOAD_WOWS
 _PAYLOAD.fields_by_name['h'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
+_PAYLOAD.fields_by_name['i'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 DESCRIPTOR.message_types_by_name['Payload'] = _PAYLOAD
 DESCRIPTOR.message_types_by_name['Response'] = _RESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -355,8 +364,8 @@ _TEST = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=412,
-  serialized_end=482,
+  serialized_start=484,
+  serialized_end=554,
   methods=[
   _descriptor.MethodDescriptor(
     name='One',

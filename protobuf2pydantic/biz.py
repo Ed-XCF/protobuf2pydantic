@@ -4,12 +4,7 @@ from functools import partial
 
 from google.protobuf.reflection import GeneratedProtocolMessageType
 from google.protobuf.descriptor import Descriptor, FieldDescriptor, EnumDescriptor
-from google.protobuf.struct_pb2 import Struct
-from google.protobuf.timestamp_pb2 import Timestamp
-from google.protobuf.duration_pb2 import Duration
 
-GOOGLE_MESSAGE = [Struct, Timestamp, Duration]
-GOOGLE_MESSAGE_STR = [i.__name__ for i in GOOGLE_MESSAGE]
 tab = " " * 4
 one_line, two_lines = linesep * 2, linesep * 3
 type_mapping = {
@@ -53,11 +48,12 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
         factory = "int"
     elif field_type == FieldDescriptor.TYPE_MESSAGE:
         type_statement: str = field.message_type.name
-        if type_statement in GOOGLE_MESSAGE_STR:
-            factory = type_statement
-        elif type_statement.endswith("Entry"):
+        if type_statement.endswith("Entry"):
             key, value = field.message_type.fields  # type: FieldDescriptor
             type_statement = f"Dict[{m(key)}, {m(value)}]"
+            factory = "dict"
+        elif type_statement == "Struct":
+            type_statement = "Dict[str, Any]"
             factory = "dict"
         else:
             extra = msg2pydantic(level, field.message_type)
@@ -83,7 +79,7 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
 def msg2pydantic(level: int, msg: Descriptor) -> str:
     class_statement = f"{tab * level}class {msg.name}(BaseModel):"
     field_statements = map(partial(convert_field, level), msg.fields)
-    return linesep.join([class_statement, *field_statements]) + linesep + get_config(level)
+    return linesep.join([class_statement, *field_statements])
 
 
 def get_config(level: int):
@@ -102,13 +98,10 @@ def pb2_to_pydantic(module) -> str:
         model_string = msg2pydantic(0, obj.DESCRIPTOR)
         pydantic_models.append(model_string)
 
-    header = """from typing import List, Dict
+    header = """from typing import List, Dict, Any
 from enum import IntEnum
 
 from pydantic import BaseModel, Field
-from google.protobuf.struct_pb2 import Struct
-from google.protobuf.timestamp_pb2 import Timestamp
-from google.protobuf.duration_pb2 import Duration
 
 
 """
