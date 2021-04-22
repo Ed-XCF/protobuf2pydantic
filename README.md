@@ -27,4 +27,3 @@
     <class 'pydantic.main.ModelMetaclass'>
 
 ### * Required proto file syntax = "proto3";
-### * No plan to support "oneof"
