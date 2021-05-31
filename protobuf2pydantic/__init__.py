@@ -1,5 +1,5 @@
 from os import linesep
-from typing import Type, List, Dict  # noqa
+from typing import *  # noqa
 from enum import IntEnum  # noqa
 
 from google.protobuf.reflection import GeneratedProtocolMessageType
