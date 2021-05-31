@@ -17,10 +17,10 @@
 
 ### in Python
 
-    >>> from protobuf2pydantic import message2pydantic as pb2py
+    >>> from protobuf2pydantic import message2pydantic as msg2py
     >>> from tests.test_pb2 import TestMessage
     >>>
-    >>> klass = pb2py(TestMessage)
+    >>> klass = msg2py(TestMessage)
     >>> print(klass)
     <class 'TestMessage'>
     >>> print(type(klass))
