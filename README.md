@@ -18,12 +18,14 @@
 ### in Python
 
     >>> from protobuf2pydantic import message2pydantic as msg2py
-    >>> from tests.test_pb2 import TestMessage
+    >>> from pydantic import validator
+    >>> 
+    >>> import transaction_pb2
     >>>
-    >>> klass = msg2py(TestMessage)
-    >>> print(klass)
-    <class 'TestMessage'>
-    >>> print(type(klass))
-    <class 'pydantic.main.ModelMetaclass'>
+    >>>
+    >>> class AmountResponse(msg2py(transaction_pb2.AmountResponse)):
+    >>>     @validator("amount")
+    >>>     def non_negative(cls, v):
+    >>>         retutn max(v, 0)
 
 ### * Required proto file syntax = "proto3";
