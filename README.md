@@ -7,25 +7,29 @@
 
 ### Generate a file which include pydantic models by using protobuf.pb2 file
 ## Installation
-
-    $ pip install protobuf2pydantic
+```shell
+pip3 install protobuf2pydantic
+```
 
 ## Getting Started
 ### in CLI
-
-    >>> pb2py ../test_pb2.py > wow.py
+```shell
+pb2py ../test_pb2.py > wow.py
+```
 
 ### in Python
+```python
+from protobuf2pydantic import message2pydantic as msg2py
+from pydantic import validator
 
-    >>> from protobuf2pydantic import message2pydantic as msg2py
-    >>> from pydantic import validator
-    >>> 
-    >>> import transaction_pb2
-    >>>
-    >>>
-    >>> class AmountResponse(msg2py(transaction_pb2.AmountResponse)):
-    >>>     @validator("amount")
-    >>>     def non_negative(cls, v):
-    >>>         retutn max(v, 0)
+import transaction_pb2
+
+
+class AmountResponse(msg2py(transaction_pb2.AmountResponse)):
+    @validator("amount")
+    def non_negative(cls, v):
+        assert v >= 0
+        return v
+```
 
 ### * Required proto file syntax = "proto3";
