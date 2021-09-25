@@ -4,6 +4,7 @@
 [![Build Status](https://www.travis-ci.org/Ed-XCF/protobuf2pydantic.svg?branch=main)](https://www.travis-ci.org/Ed-XCF/protobuf2pydantic)
 [![codecov](https://codecov.io/gh/Ed-XCF/protobuf2pydantic/branch/main/graph/badge.svg?token=4YYBSTLS5F)](https://codecov.io/gh/Ed-XCF/protobuf2pydantic)
 ![PyPI](https://img.shields.io/pypi/v/protobuf2pydantic)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/Ed-XCF/protobuf2pydantic.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Ed-XCF/protobuf2pydantic/context:python)
 
 ### Generate a file which include pydantic models by using protobuf.pb2 file
 ## Installation
