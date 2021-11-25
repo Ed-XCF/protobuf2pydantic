@@ -22,3 +22,6 @@ def message2pydantic(message: GeneratedProtocolMessageType) -> Type[BaseModel]:
     sub_namespace = {k: v for k, v in globals().items() if not k.startswith("__")}
     exec(compile_code, sub_namespace)
     return sub_namespace[getter_key]()
+
+
+msg2py = message2pydantic

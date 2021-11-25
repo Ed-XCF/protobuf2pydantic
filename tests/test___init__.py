@@ -8,3 +8,6 @@ def test_message2pydantic():
     klass = message2pydantic(TestMessage)
     assert isinstance(klass, ModelMetaclass)
     assert klass.__name__ == TestMessage.__name__
+
+
+test_msg2py = test_message2pydantic

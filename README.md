@@ -20,7 +20,7 @@ pb2py ../test_pb2.py > wow.py
 
 ### in Python
 ```python
-from protobuf2pydantic import message2pydantic as msg2py
+from protobuf2pydantic import msg2py
 from pydantic import validator
 
 import transaction_pb2
