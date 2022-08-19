@@ -34,6 +34,7 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
     level += 1
     field_type = field.type
     field_label = field.label
+    was_mapping = False
     extra = None
 
     if field_type == FieldDescriptor.TYPE_ENUM:
@@ -46,11 +47,16 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
         )
         extra = linesep.join([class_statement, *field_statements])
         factory = "int"
+
     elif field_type == FieldDescriptor.TYPE_MESSAGE:
         type_statement: str = field.message_type.name
         if type_statement.endswith("Entry"):
             key, value = field.message_type.fields  # type: FieldDescriptor
-            type_statement = f"Dict[{m(key)}, {m(value)}]"
+            if value.type != 11:
+                type_statement = f"Dict[{m(key)}, {m(value)}]"
+            else:
+                was_mapping = True
+                type_statement = f"Dict[{m(key)}, {value.message_type.name}]"
             factory = "dict"
         elif type_statement == "Struct":
             type_statement = "Dict[str, Any]"
@@ -62,7 +68,7 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
         type_statement = m(field)
         factory = type_statement
 
-    if field_label == FieldDescriptor.LABEL_REPEATED:
+    if field_label == FieldDescriptor.LABEL_REPEATED and not was_mapping:
         type_statement = f"List[{type_statement}]"
         factory = "list"
 
