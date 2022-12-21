@@ -5,6 +5,14 @@ from functools import partial
 from google.protobuf.reflection import GeneratedProtocolMessageType
 from google.protobuf.descriptor import Descriptor, FieldDescriptor, EnumDescriptor
 
+message_metaclasses = [GeneratedProtocolMessageType]
+try:
+    from google._upb._message import MessageMeta
+
+    message_metaclasses.append(MessageMeta)
+except ImportError:
+    pass
+
 tab = " " * 4
 one_line, two_lines = linesep * 2, linesep * 3
 type_mapping = {
@@ -99,7 +107,7 @@ def pb2_to_pydantic(module) -> str:
     pydantic_models: List[str] = []
     for i in dir(module):
         obj = getattr(module, i)
-        if not isinstance(obj, GeneratedProtocolMessageType):
+        if not any(isinstance(obj, metacls) for metacls in message_metaclasses):
             continue
         model_string = msg2pydantic(0, obj.DESCRIPTOR)
         pydantic_models.append(model_string)
