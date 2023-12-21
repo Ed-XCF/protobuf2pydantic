@@ -92,7 +92,10 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
 
 def msg2pydantic(level: int, msg: Descriptor) -> str:
     class_statement = f"{tab * level}class {msg.name}(BaseModel):"
-    field_statements = map(partial(convert_field, level), msg.fields)
+    if msg.fields:
+        field_statements = map(partial(convert_field, level), msg.fields)
+    else:
+        field_statements = [tab + "pass"]
     return linesep.join([class_statement, *field_statements])
 
 
