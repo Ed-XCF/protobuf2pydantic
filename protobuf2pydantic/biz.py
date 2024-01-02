@@ -33,17 +33,43 @@ type_mapping = {
     FieldDescriptor.TYPE_SINT64: int,
 }
 
+# maintain map of level to list of created class names
+defined_classes :dict[int, list[str]] = {}
+
 
 def m(field: FieldDescriptor) -> str:
     return type_mapping[field.type].__name__
 
 
-def convert_field(level: int, field: FieldDescriptor) -> str:
+def class_already_defined(level: int, field: FieldDescriptor) -> bool:
+    try:
+        already_defined = defined_classes[level]
+    except KeyError:
+        return False
+    if field.type == FieldDescriptor.TYPE_ENUM:
+        return field.enum_type.name in already_defined
+    elif field.type == FieldDescriptor.TYPE_MESSAGE:
+        return field.message_type.name in already_defined
+    return False
+
+
+def add_defined_class(level: int, class_name: str):
+    try:
+        defined_classes[level]
+    except KeyError:
+        defined_classes[level] = []
+    defined_classes[level].append(class_name)
+        
+
+def convert_field(level: int, field: FieldDescriptor) -> str | None:
     level += 1
     field_type = field.type
     field_label = field.label
     was_mapping = False
     extra = None
+
+    if class_already_defined(level, field):
+        return
 
     if field_type == FieldDescriptor.TYPE_ENUM:
         enum_type: EnumDescriptor = field.enum_type
@@ -53,6 +79,7 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
             lambda value: f"{tab * (level + 1)}{value.name} = {value.index}",
             enum_type.values,
         )
+        add_defined_class(level, enum_type.name)
         extra = linesep.join([class_statement, *field_statements])
         factory = "int"
 
@@ -92,11 +119,12 @@ def convert_field(level: int, field: FieldDescriptor) -> str:
 
 def msg2pydantic(level: int, msg: Descriptor) -> str:
     class_statement = f"{tab * level}class {msg.name}(BaseModel):"
+    add_defined_class(level, msg.name)
     if msg.fields:
         field_statements = map(partial(convert_field, level), msg.fields)
     else:
         field_statements = [tab + "pass"]
-    return linesep.join([class_statement, *field_statements])
+    return linesep.join([class_statement, *[fs for fs in field_statements if fs]])
 
 
 def get_config(level: int):
