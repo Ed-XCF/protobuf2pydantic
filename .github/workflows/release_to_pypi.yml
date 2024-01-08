@@ -17,7 +17,17 @@ jobs:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
     steps:
-      # retrieve your distributions here
-
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: |
+          make release
+          pip install setuptools wheel twine
+      - name: Get version
+        run: echo $GITHUB_REF | awk -F '/' '{print $3}' >> version
       - name: Publish package distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
