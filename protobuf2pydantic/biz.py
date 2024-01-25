@@ -123,7 +123,7 @@ def msg2pydantic(level: int, msg: Descriptor) -> str:
     if msg.fields:
         field_statements = map(partial(convert_field, level), msg.fields)
     else:
-        field_statements = [tab + "pass"]
+        field_statements = [f"{tab * (level + 1)}pass"]
     return linesep.join([class_statement, *[fs for fs in field_statements if fs]])
 
 
