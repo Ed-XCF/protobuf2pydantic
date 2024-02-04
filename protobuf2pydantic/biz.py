@@ -1,5 +1,5 @@
 from os import linesep
-from typing import List
+from typing import List, Optional
 from functools import partial
 
 from google.protobuf.reflection import GeneratedProtocolMessageType
@@ -61,7 +61,7 @@ def add_defined_class(level: int, class_name: str):
     defined_classes[level].append(class_name)
         
 
-def convert_field(level: int, field: FieldDescriptor) -> str | None:
+def convert_field(level: int, field: FieldDescriptor) -> Optional[str]:
     level += 1
     field_type = field.type
     field_label = field.label
